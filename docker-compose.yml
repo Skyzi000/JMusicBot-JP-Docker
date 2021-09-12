@@ -1,0 +1,13 @@
+version: "3.7"
+services:
+    jmusicbot:
+        image: 'ghcr.io/skyzi000/jmusicbot-jp-docker:latest'
+        container_name: 'jmusicbot'
+        volumes:
+            - ./logs:/jmusicbot/logs
+            - type: bind
+              source: ./config.txt
+              target: /jmusicbot/config.txt
+            - type: bind
+              source: ./serversettings.json
+              target: /jmusicbot/serversettings.json
