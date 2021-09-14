@@ -5,6 +5,7 @@ services:
         container_name: 'jmusicbot'
         volumes:
             - ./logs:/jmusicbot/logs
+            - ./Playlists:/jmusicbot/Playlists
             - type: bind
               source: ./config.txt
               target: /jmusicbot/config.txt
