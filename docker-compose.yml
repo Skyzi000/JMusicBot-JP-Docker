@@ -12,3 +12,4 @@ services:
             - type: bind
               source: ./serversettings.json
               target: /jmusicbot/serversettings.json
+        # restart: always
