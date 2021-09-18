@@ -1,6 +1,6 @@
 FROM adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.12_7
 
-ENV JMUSICBOT_VERSION=0.6.2
+ENV JMUSICBOT_VERSION=0.6.3
 
 RUN apk update &&\
     apk add --no-cache curl
