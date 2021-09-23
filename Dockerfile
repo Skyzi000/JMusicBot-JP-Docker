@@ -7,8 +7,8 @@ RUN apk update &&\
 
 WORKDIR /jmusicbot
 
-RUN curl -SLO "https://github.com/Cosgy-Dev/JMusicBot-JP/releases/download/${JMUSICBOT_VERSION}/JMusicBot-${JMUSICBOT_VERSION}.jar"
+RUN curl -SLo JMusicBot.jar https://github.com/Cosgy-Dev/JMusicBot-JP/releases/download/${JMUSICBOT_VERSION}/JMusicBot-${JMUSICBOT_VERSION}.jar
 
 COPY config.txt ./
 
-ENTRYPOINT java -Dnogui=true -jar JMusicBot-${JMUSICBOT_VERSION}.jar
+ENTRYPOINT [ "java", "-Dnogui=true", "-jar", "JMusicBot.jar" ]
