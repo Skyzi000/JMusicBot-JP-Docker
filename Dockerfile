@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:x86_64-alpine-jre-11.0.12_7
+FROM adoptopenjdk/openjdk11:alpine-jre
 
 ENV JMUSICBOT_VERSION=0.6.5
 
