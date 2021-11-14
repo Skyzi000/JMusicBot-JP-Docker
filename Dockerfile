@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk11:alpine as build
+FROM alpine:latest AS builder
 ENV JMUSICBOT_VERSION=0.6.5
 
 WORKDIR /build
@@ -11,7 +11,6 @@ RUN curl -SLo JMusicBot.jar https://github.com/Cosgy-Dev/JMusicBot-JP/releases/d
 FROM adoptopenjdk/openjdk11:alpine-jre
 
 WORKDIR /jmusicbot
-COPY --from=build /build .
-COPY config.txt ./
+COPY --from=builder /build .
 
 ENTRYPOINT [ "java", "-Dnogui=true", "-jar", "JMusicBot.jar" ]
