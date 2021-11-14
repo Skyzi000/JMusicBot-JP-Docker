@@ -1,7 +1,7 @@
 version: "3.7"
 services:
     jmusicbot:
-        image: 'ghcr.io/skyzi000/jmusicbot-jp-docker:latest'
+        image: 'skyzi000/jmusicbot-jp:latest'
         container_name: 'jmusicbot'
         volumes:
             - ./logs:/jmusicbot/logs
