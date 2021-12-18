@@ -1,6 +1,6 @@
 # JMusicBotJP Docker
 
-[![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/Skyzi000/JMusicBot-JP-Docker?label=latest)](https://github.com/Skyzi000/JMusicBot-JP-Docker/pkgs/container/jmusicbot-jp-docker)
+[![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/skyzi000/jmusicbot-jp/latest)](https://hub.docker.com/r/skyzi000/jmusicbot-jp/tags?page=1&ordering=last_updated)
 [![Docker Pulls](https://img.shields.io/docker/pulls/skyzi000/jmusicbot-jp)](https://hub.docker.com/r/skyzi000/jmusicbot-jp)
 [![Last Commit](https://img.shields.io/github/last-commit/Skyzi000/JMusicBot-JP-Docker)](https://github.com/Skyzi000/JMusicBot-JP-Docker/commits)
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/Skyzi000/JMusicBot-JP-Docker/Docker)](https://github.com/Skyzi000/JMusicBot-JP-Docker/actions/workflows/docker-publish.yml)
