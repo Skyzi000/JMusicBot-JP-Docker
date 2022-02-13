@@ -6,6 +6,8 @@ services:
         volumes:
             - ./logs:/jmusicbot/logs
             - ./Playlists:/jmusicbot/Playlists
+            - ./Mylists:/jmusicbot/Mylists
+            - ./Publist:/jmusicbot/Publist
             - type: bind
               source: ./config.txt
               target: /jmusicbot/config.txt
