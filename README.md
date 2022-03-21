@@ -12,7 +12,7 @@
 
 - 常時起動が簡単
 - 更新が簡単
-- 圧縮されたイメージサイズが非常に小さい(70~80MB程度)！
+- イメージサイズが非常に小さい(圧縮サイズが65~80MB程度)！
 - Dockerがわからなくても(多分)使える
 
 ## 初回起動(docker-composeを使用)
@@ -50,4 +50,32 @@
         restart: always
 ```
 
-に変更(コメントアウトを解除)してから起動する
+に変更(コメントアウトを解除)してから起動します。
+
+## プレリリース（ベータ）バージョンを利用する
+
+`docker-compose.yml`の
+
+```yml
+        image: 'skyzi000/jmusicbot-jp:latest'
+```
+
+を
+
+```yml
+        image: 'skyzi000/jmusicbot-jp:beta'
+```
+
+に変更し、`docker-compose pull`で新しいイメージを入手してから起動します。
+
+なお、`latest`タグが正式バージョンのみを含むのに対し、`beta`は正式バージョンとプレリリースバージョンの両方を含む予定です。  
+それぞれのイメージの現在の最新バージョンは以下のラベルの通りです。
+
+[![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/skyzi000/jmusicbot-jp/latest?label=latest)](https://hub.docker.com/r/skyzi000/jmusicbot-jp/tags?page=1&ordering=last_updated)
+[![Docker Image Version (tag beta semver)](https://img.shields.io/docker/v/skyzi000/jmusicbot-jp/beta?label=beta)](https://hub.docker.com/r/skyzi000/jmusicbot-jp/tags?page=1&ordering=last_updated)
+
+### その他のDockerタグについて
+
+`edge`や`main`タグは開発時のテスト用イメージのため、動作しない可能性が最も高くお勧めしません。  
+`nightly`タグのイメージは毎日自動でビルドされており、最新のJREを使いたい場合はおすすめです(が、動作確認はしていません)。  
+`nightly`でのJMusicBot-JPバージョンは、基本的に`beta`と同じものになります。
