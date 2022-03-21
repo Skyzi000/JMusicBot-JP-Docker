@@ -71,6 +71,7 @@ jobs:
             type=ref,event=branch
             type=ref,event=pr
             type=match,pattern=(\d+\.\d+\.\d+$),value=latest
+            type=semver,pattern={{version}},value=beta
             type=semver,pattern={{version}}
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}},enable=${{ !startsWith(github.ref, 'refs/tags/v0.') }}
