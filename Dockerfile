@@ -8,8 +8,7 @@ RUN apk update &&\
 RUN curl -SLo JMusicBot.jar https://github.com/Cosgy-Dev/JMusicBot-JP/releases/download/${JMUSICBOT_VERSION}/JMusicBot-${JMUSICBOT_VERSION}.jar
 
 
-FROM adoptopenjdk/openjdk11:alpine-jre
-
+FROM eclipse-temurin:11-jre-alpine
 WORKDIR /jmusicbot
 COPY --from=builder /build .
 
