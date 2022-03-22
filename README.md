@@ -13,6 +13,8 @@
 - 常時起動が簡単
 - 更新が簡単
 - イメージサイズが非常に小さい(圧縮サイズが65~80MB程度)！
+  - ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/skyzi000/jmusicbot-jp/latest?label=latest%20size)
+  - ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/skyzi000/jmusicbot-jp/beta?label=beta%20size)
 - Dockerがわからなくても(多分)使える
 
 ## 初回起動(docker-composeを使用)
@@ -69,10 +71,6 @@
 に変更し、`docker-compose pull`で新しいイメージを入手してから起動します。
 
 なお、`latest`タグが正式バージョンのみを含むのに対し、`beta`は正式バージョンとプレリリースバージョンの両方を含む予定です。  
-それぞれのイメージの現在の最新バージョンは以下のラベルの通りです。
-
-[![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/skyzi000/jmusicbot-jp/latest?label=latest)](https://hub.docker.com/r/skyzi000/jmusicbot-jp/tags?page=1&ordering=last_updated)
-[![Docker Image Version (tag beta semver)](https://img.shields.io/docker/v/skyzi000/jmusicbot-jp/beta?label=beta)](https://hub.docker.com/r/skyzi000/jmusicbot-jp/tags?page=1&ordering=last_updated)
 
 ### その他のDockerタグについて
 
