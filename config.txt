@@ -148,9 +148,17 @@ publistfolder = Publist
 // デフォルトは true です。
 updatealerts = true
 
+// この項目は、ユーザーがコマンドを実行したときにその記録をログに記録するかを設定します。
+// コマンドの実行記録を保存する場合は true, 記録しない場合は false と設定してください。
+auditcommands = false
+
+// inviteコマンドを有効にするかを設定します。
+// inviteコマンドを有効にする場合は設定を`true`に設定してください。
+// デフォルトは false です。
+useinvitecommand = false
 
 // この項目は、歌詞を検索するサイトを設定します。
-// 利用可能なサイトは次の通りです: "AZ Lyrics", "Genius", "MusicMatch"
+// 利用可能なサイトは次の通りです: "AZ Lyrics", "Genius", "MusicMatch", "LyricsFreak"
 // 現時点ではAZ LyricsまたはMusicMatchに設定することを推奨します。
 // Geniusは曲以外の検索結果を表示する傾向があるため、求めている歌詞が表示されない可能性があります。
 // プロバイダのContribution(開発)に興味がある場合は、JLyricsのレポジトリを参照して下さい。
@@ -169,38 +177,49 @@ lyrics.default = "MusicMatch"
 
 aliases {
   // General commands
-  settings = [ status ]
+  settings = [status]
 
   // Music commands
   lyrics = []
-  nowplaying = [ np, current ]
+  nowplaying = [np, current]
   play = []
-  playlists = [ pls ]
-  queue = [ list ]
-  remove = [ delete ]
+  playlists = [pls]
+  queue = [list]
+  remove = [delete]
   scsearch = []
-  ncsearch = [ niconicosearch, nicosearch, ncs, nicos ]
-  search = [ ytsearch ]
+  ncsearch = [niconicosearch, nicosearch, ncs, nicos]
+  search = [ytsearch]
   shuffle = []
-  skip = [ voteskip ]
+  skip = [voteskip]
 
   // Admin commands
-  prefix = [ setprefix ]
+  prefix = [setprefix]
   setdj = []
+  setskip = [setskippercent, skippercent, setskipratio]
   settc = []
   setvc = []
 
   // DJ Commands
-  forceremove = [ forcedelete, modremove, moddelete, modelete ]
-  forceskip = [ modskip ]
-  movetrack = [ move ]
+  forceremove = [forcedelete, modremove, moddelete, modelete]
+  forceskip = [modskip]
+  movetrack = [move]
   pause = []
   playnext = []
   repeat = []
-  skipto = [ jumpto ]
+  skipto = [jumpto]
   stop = []
-  volume = [ vol ]
+  volume = [vol]
 }
+
+// 変換は、特定の再生入力を変更し、それらをさまざまな種類の入力に変換するために使用されます。これらは使用が非常に複雑で、
+// 使用例が限られていますが、理論的には、大まかなホワイトリストまたはブラックリスト、一部のソースからのラウンドアバウトの読み込み、
+// および方法のカスタマイズが可能です。 物事が要求されます。
+//
+// これらは設定が簡単ではないため、これらを使用する場合は、コードを調べて、それらがどのように機能し、
+// どのフィールドが必要かを確認する必要があります。 また、これを行うためのより良い方法を見つけた場合、
+// 将来この機能が完全に削除される可能性があります。
+
+transforms = {}
 
 
 // この項目を true に設定すると、所有者設定したユーザーに対してevalが有効になります。
