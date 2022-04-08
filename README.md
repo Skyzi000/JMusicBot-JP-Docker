@@ -22,6 +22,8 @@
 1. このリポジトリをクローンするか[Download ZIP](https://github.com/Skyzi000/JMusicBot-JP-Docker/archive/refs/heads/main.zip)する
 2. Botアカウントを作成する(参考: <https://www.cosgy.dev/2019/09/06/jmusicbot-setup/#toc5> )
 3. Botをサーバーに入れる(参考: <https://www.cosgy.dev/2019/09/06/jmusicbot-setup/#toc6> )
+  - →スラッシュコマンドを利用するためには、`applications.commands`スコープを有効にしなければならない点に注意
+    ![image](https://user-images.githubusercontent.com/38061609/162373657-efa3af49-25ba-4a24-a618-1547ea905feb.png)
 4. `config.txt`を編集する(参考: <https://www.cosgy.dev/2019/09/06/jmusicbot-setup/#toc7>)
 5. この`docker-compose.yml`のあるフォルダに移動(`cd`)する
 6. `docker-compose up -d`で起動する
