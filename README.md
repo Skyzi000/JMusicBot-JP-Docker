@@ -12,7 +12,7 @@
 
 - 常時起動が簡単
 - 更新が簡単
-- イメージサイズが非常に小さい(圧縮サイズが65~80MB程度)！
+- イメージサイズが非常に小さい(圧縮サイズが65~90MB程度)！
   - ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/skyzi000/jmusicbot-jp/latest?label=latest%20size)
   - ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/skyzi000/jmusicbot-jp/beta?label=beta%20size)
 - Dockerがわからなくても(多分)使える
