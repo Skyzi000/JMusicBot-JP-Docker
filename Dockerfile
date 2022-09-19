@@ -1,6 +1,6 @@
 FROM alpine:latest AS builder
 
-ENV JMUSICBOT_VERSION=0.7.3
+ENV JMUSICBOT_VERSION=0.7.4
 
 WORKDIR /build
 RUN apk update &&\
