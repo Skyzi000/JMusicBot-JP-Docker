@@ -122,8 +122,8 @@ nicopass = "0123456789"
 ytemail = ""
 ytpass = ""
 
-// Spotifyのログイン情報を入力してください。
-// SpotifyのURLから曲の情報を取得するためにログイン情報を使用します。
+// SpotifyAPIのクライアントキーとシークレットキーを入力ください。
+// SpotifyのURLから曲の情報を取得するためにSpotifyAPIを使用します。
 spclient = ""
 spsecret = ""
 
