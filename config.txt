@@ -189,7 +189,10 @@ lyrics.default = "MusicMatch"
 
 aliases {
   // General commands
+  help = []
+  cache = []
   settings = [status]
+  serverinfo = []
 
   // Music commands
   lyrics = []
@@ -221,6 +224,7 @@ aliases {
   skipto = [jumpto]
   stop = []
   volume = [vol]
+  spotify = []
 }
 
 // 変換は、特定の再生入力を変更し、それらをさまざまな種類の入力に変換するために使用されます。これらは使用が非常に複雑で、
