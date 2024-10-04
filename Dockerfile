@@ -14,6 +14,8 @@ FROM adoptopenjdk/openjdk11:alpine-jre
 WORKDIR /jmusicbot
 COPY --from=builder /build .
 RUN apk update &&\
-    apk add --no-cache ffmpeg python3
+    apk add --no-cache ffmpeg python3 py3-pip python3-dev gcc musl-dev &&\
+    python3 -m pip install -U --pre --no-cache-dir yt-dlp &&\
+    apk del py3-pip python3-dev gcc musl-dev
 
 ENTRYPOINT [ "java", "-Dnogui=true", "-jar", "JMusicBot.jar" ]
