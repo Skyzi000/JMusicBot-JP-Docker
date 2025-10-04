@@ -77,4 +77,5 @@ jobs:
             ## リリース情報
             [リリースノート](https://github.com/Cosgy-Dev/JMusicBot-JP/releases/tag/${{ steps.latest.outputs.version }})
           branch: update-jmusicbot-${{ steps.latest.outputs.version }}
+          base: develop
           delete-branch: true
