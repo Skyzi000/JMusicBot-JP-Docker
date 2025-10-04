@@ -48,6 +48,19 @@ jobs:
           sed -i "s/ENV JMUSICBOT_VERSION=.*/ENV JMUSICBOT_VERSION=${{ steps.latest.outputs.version }}/" Dockerfile
           cat Dockerfile
 
+      - name: Download latest config.txt
+        if: steps.check.outputs.update_needed == 'true'
+        run: |
+          # 最新のconfig.txtをダウンロードして完全に上書き
+          CONFIG_URL=$(curl -s "https://api.github.com/repos/Cosgy-Dev/JMusicBot-JP/releases/tags/${{ steps.latest.outputs.version }}" | jq -r '.assets[] | select(.name == "config.txt") | .browser_download_url')
+          if [ -n "$CONFIG_URL" ]; then
+            echo "Downloading config.txt from: $CONFIG_URL"
+            curl -SLo config.txt "$CONFIG_URL"
+            echo "config.txt has been updated"
+          else
+            echo "Warning: config.txt not found in release assets"
+          fi
+
       - name: Create Pull Request
         if: steps.check.outputs.update_needed == 'true'
         uses: peter-evans/create-pull-request@v6
@@ -57,6 +70,11 @@ jobs:
           body: |
             JMusicBot-JPの新しいバージョン `${{ steps.latest.outputs.version }}` がリリースされました。
             
+            ## 変更内容
+            - Dockerfileのバージョンを更新
+            - config.txtを最新版に更新
+            
+            ## リリース情報
             [リリースノート](https://github.com/Cosgy-Dev/JMusicBot-JP/releases/tag/${{ steps.latest.outputs.version }})
           branch: update-jmusicbot-${{ steps.latest.outputs.version }}
           delete-branch: true
