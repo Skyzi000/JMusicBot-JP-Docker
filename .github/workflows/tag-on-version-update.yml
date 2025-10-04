@@ -1,0 +1,59 @@
+name: Tag on Version Update
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Dockerfile'
+
+jobs:
+  create-tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check if version changed
+        id: check
+        run: |
+          # 現在のバージョンを取得
+          CURRENT_VERSION=$(grep 'ENV JMUSICBOT_VERSION=' Dockerfile | cut -d'=' -f2)
+          echo "current=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+          
+          # 1つ前のコミットのバージョンを取得
+          git checkout HEAD~1 -- Dockerfile 2>/dev/null || echo "First commit"
+          PREVIOUS_VERSION=$(grep 'ENV JMUSICBOT_VERSION=' Dockerfile 2>/dev/null | cut -d'=' -f2 || echo "none")
+          git checkout HEAD -- Dockerfile
+          echo "previous=$PREVIOUS_VERSION" >> $GITHUB_OUTPUT
+          
+          # バージョンが変更されたかチェック
+          if [ "$CURRENT_VERSION" != "$PREVIOUS_VERSION" ] && [ "$CURRENT_VERSION" != "" ]; then
+            echo "Version changed: $PREVIOUS_VERSION -> $CURRENT_VERSION"
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "Version not changed"
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create and push tag
+        if: steps.check.outputs.changed == 'true'
+        run: |
+          VERSION=${{ steps.check.outputs.current }}
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # タグが既に存在するかチェック
+          if git rev-parse "v$VERSION" >/dev/null 2>&1; then
+            echo "Tag v$VERSION already exists, skipping"
+          else
+            git tag -a "v$VERSION" -m "https://github.com/Cosgy-Dev/JMusicBot-JP/releases/tag/$VERSION"
+            git push origin "v$VERSION"
+            echo "Created and pushed tag: v$VERSION"
+          fi
