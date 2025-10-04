@@ -1,6 +1,6 @@
 FROM alpine:latest AS builder
 
-ENV JMUSICBOT_VERSION=0.10.2
+ENV JMUSICBOT_VERSION=0.10.4-pre.1
 ENV JAR_PREFIX=JMusicBot-
 
 WORKDIR /build
