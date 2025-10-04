@@ -13,7 +13,7 @@
 - 常時起動が簡単
 - 更新が簡単
 - イメージサイズが最小限
-  ※0.9.8以降はffmpegやpythonを含むため少し大きくなっています。
+  ※0.9.8以降はffmpegを含むため少し大きくなっています。
   - ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/skyzi000/jmusicbot-jp/latest?label=latest%20size)
   - ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/skyzi000/jmusicbot-jp/beta?label=beta%20size)
 - Dockerがわからなくても(多分)使える
