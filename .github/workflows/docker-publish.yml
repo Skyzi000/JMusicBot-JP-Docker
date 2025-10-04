@@ -9,13 +9,13 @@ on:
   # schedule:
   #   - cron: '15 4 * * *'
   push:
-    branches: [ main ]
+    branches: [ main, develop ]
     paths-ignore:
       - "**.md"
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, develop ]
     paths-ignore:
       - "**.md"
 
