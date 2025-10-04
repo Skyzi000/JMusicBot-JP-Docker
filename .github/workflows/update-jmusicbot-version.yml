@@ -20,7 +20,7 @@ jobs:
       - name: Get latest JMusicBot-JP version
         id: latest
         run: |
-          LATEST_VERSION=$(curl -s https://api.github.com/repos/Cosgy-Dev/JMusicBot-JP/releases/latest | jq -r '.tag_name')
+          LATEST_VERSION=$(curl -s https://api.github.com/repos/Cosgy-Dev/JMusicBot-JP/releases | jq -r '.[0].tag_name')
           echo "version=$LATEST_VERSION" >> $GITHUB_OUTPUT
           echo "Latest version: $LATEST_VERSION"
 
@@ -52,23 +52,11 @@ jobs:
         if: steps.check.outputs.update_needed == 'true'
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: "chore: update JMusicBot-JP to ${{ steps.latest.outputs.version }}"
-          title: "Update JMusicBot-JP to ${{ steps.latest.outputs.version }}"
+          commit-message: "JMusicBotのバージョンを${{ steps.latest.outputs.version }}に更新"
+          title: "JMusicBotのバージョンを${{ steps.latest.outputs.version }}に更新"
           body: |
-            ## JMusicBot-JP バージョン更新
+            JMusicBot-JPの新しいバージョン `${{ steps.latest.outputs.version }}` がリリースされました。
             
-            新しいバージョンがリリースされました。
-            
-            - **現在のバージョン**: `${{ steps.current.outputs.version }}`
-            - **新しいバージョン**: `${{ steps.latest.outputs.version }}`
-            
-            ### 変更内容
-            - Dockerfileの`JMUSICBOT_VERSION`を更新
-            
-            ### リリースノート
-            https://github.com/Cosgy-Dev/JMusicBot-JP/releases/tag/${{ steps.latest.outputs.version }}
-            
-            ---
-            このプルリクエストは自動的に作成されました。
+            [リリースノート](https://github.com/Cosgy-Dev/JMusicBot-JP/releases/tag/${{ steps.latest.outputs.version }})
           branch: update-jmusicbot-${{ steps.latest.outputs.version }}
           delete-branch: true
