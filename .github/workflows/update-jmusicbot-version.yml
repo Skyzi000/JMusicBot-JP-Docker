@@ -50,7 +50,7 @@ jobs:
 
       - name: Create Pull Request
         if: steps.check.outputs.update_needed == 'true'
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "JMusicBotのバージョンを${{ steps.latest.outputs.version }}に更新"
           title: "JMusicBotのバージョンを${{ steps.latest.outputs.version }}に更新"
