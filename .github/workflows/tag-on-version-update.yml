@@ -24,12 +24,12 @@ jobs:
         id: check
         run: |
           # 現在のバージョンを取得
-          CURRENT_VERSION=$(grep 'ENV JMUSICBOT_VERSION=' Dockerfile | cut -d'=' -f2)
+          CURRENT_VERSION=$(grep 'ARG JMUSICBOT_VERSION=' Dockerfile | head -n 1 | cut -d'=' -f2)
           echo "current=$CURRENT_VERSION" >> $GITHUB_OUTPUT
           
           # 1つ前のコミットのバージョンを取得
           git checkout HEAD~1 -- Dockerfile 2>/dev/null || echo "First commit"
-          PREVIOUS_VERSION=$(grep 'ENV JMUSICBOT_VERSION=' Dockerfile 2>/dev/null | cut -d'=' -f2 || echo "none")
+          PREVIOUS_VERSION=$(grep 'ARG JMUSICBOT_VERSION=' Dockerfile 2>/dev/null | head -n 1 | cut -d'=' -f2 || echo "none")
           git checkout HEAD -- Dockerfile
           echo "previous=$PREVIOUS_VERSION" >> $GITHUB_OUTPUT
           
