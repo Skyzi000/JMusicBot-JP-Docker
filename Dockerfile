@@ -1,6 +1,6 @@
-FROM alpine:latest AS builder
+FROM alpine:3.23 AS builder
 
-ARG JMUSICBOT_VERSION=0.10.4-pre.1
+ARG JMUSICBOT_VERSION=0.11.0
 ARG JAR_PREFIX=JMusicBot-
 
 WORKDIR /build
@@ -12,7 +12,7 @@ RUN JAR_URL=$(curl -s "https://api.github.com/repos/Cosgy-Dev/JMusicBot-JP/relea
     echo "Downloading: ${JAR_URL}" && \
     curl -SLo JMusicBot.jar "${JAR_URL}"
 
-FROM adoptopenjdk/openjdk11:alpine-jre AS runtime
+FROM eclipse-temurin:25-jre-alpine-3.23 AS runtime
 
 WORKDIR /jmusicbot
 

@@ -38,7 +38,7 @@
 
 1. この`docker-compose.yml`のあるフォルダに移動(`cd`)する
 2. `docker-compose pull`で新しいイメージを入手する
-3. `config.txt`が更新されていたら更新する
+3. `config.txt`はJMusicBot v0.11.0以降なら起動時に自動更新されます
 4. `docker-compose up -d`で起動する
 
 ## 常時起動させる
