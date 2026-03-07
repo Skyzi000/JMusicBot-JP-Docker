@@ -12,7 +12,7 @@ on:
     branches: [ main, develop ]
     paths-ignore:
       - "**.md"
-    # Publish semver tags as releases.
+    # Publish timestamp-suffixed release tags.
     tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ main, develop ]
@@ -60,6 +60,61 @@ jobs:
           username: ${{ github.repository_owner }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Prepare Docker metadata tags
+        id: prepare-tags
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            ref_name="${GITHUB_REF_NAME}"
+            if [[ ! "$ref_name" =~ ^v(.+)-([0-9]{14})$ ]]; then
+              echo "サポートされていないリリースタグ形式です: $ref_name" >&2
+              exit 1
+            fi
+
+            source_version="${BASH_REMATCH[1]}"
+            release_timestamp="${BASH_REMATCH[2]}"
+            current_version="$(grep '^ARG JMUSICBOT_VERSION=' Dockerfile | head -n 1 | cut -d'=' -f2)"
+            if [[ "$source_version" != "$current_version" ]]; then
+              echo "タグの元バージョン ($source_version) と Dockerfile の JMUSICBOT_VERSION ($current_version) が一致しません。" >&2
+              exit 1
+            fi
+
+            metadata_tags=(
+              "type=raw,value=${source_version}-${release_timestamp}"
+              "type=raw,value=${source_version}"
+              "type=raw,value=beta"
+            )
+
+            if [[ "$source_version" != *-* ]]; then
+              if [[ ! "$source_version" =~ ^([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+                echo "正式版として解釈できないバージョンです: $source_version" >&2
+                exit 1
+              fi
+
+              major="${BASH_REMATCH[1]}"
+              minor="${BASH_REMATCH[2]}"
+              metadata_tags+=(
+                "type=raw,value=${major}.${minor}"
+                "type=raw,value=${major}"
+                "type=raw,value=latest"
+              )
+            fi
+          else
+            metadata_tags=(
+              "type=schedule,pattern=nightly"
+              "type=edge,enable=true,branch=develop"
+              "type=edge,enable=true,branch=main"
+              "type=ref,event=branch"
+              "type=ref,event=pr"
+            )
+          fi
+
+          {
+            echo "metadata_tags<<EOF"
+            printf '%s\n' "${metadata_tags[@]}"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
       # Extract metadata (tags, labels) for Docker
       # https://github.com/docker/metadata-action
       - name: Extract Docker metadata
@@ -70,17 +125,7 @@ jobs:
           images: |
             ${{ env.DOCKERHUB_USERNAME }}/${{ env.IMAGE_NAME }}
             ${{ env.REGISTRY }}/${{ github.repository }}
-          tags: |
-            type=schedule,pattern=nightly
-            type=edge,enable=true,branch=develop
-            type=edge,enable=true,branch=main
-            type=ref,event=branch
-            type=ref,event=pr
-            type=match,pattern=.*,value=latest,enable=${{ startsWith(github.ref, 'refs/tags/v') && !contains(github.ref, '-') }}
-            type=match,pattern=.*,value=beta,enable=${{ startsWith(github.ref, 'refs/tags/v') }}
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
+          tags: ${{ steps.prepare-tags.outputs.metadata_tags }}
 
       # Build and push Docker image with Buildx (don't push on PR)
       # https://github.com/docker/build-push-action
