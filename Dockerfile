@@ -21,10 +21,14 @@ RUN zip -d JMusicBot.jar \
       "org/bytedeco/*/linux-arm*/*" \
       "org/bytedeco/*/linux-ppc*/*" \
       "org/bytedeco/*/linux-x86/*" \
-      "natives/win32-*/*" \
+      "org/bytedeco/*/linux-riscv*/*" \
+      "natives/win*/*" \
       "natives/darwin/*" \
       "natives/linux-arm/*" \
+      "natives/linux-armhf/*" \
+      "natives/linux-aarch32/*" \
       "natives/linux-aarch64/*" \
+      "natives/linux-musl-*/*" \
       "natives/linux-x86/*" \
       "com/sun/jna/win32-*/*" \
       "com/sun/jna/darwin/*" \
@@ -33,6 +37,9 @@ RUN zip -d JMusicBot.jar \
       "com/sun/jna/linux-ppc*/*" \
       "com/sun/jna/linux-x86/*" \
       "com/sun/jna/sunos-*/*" \
+      "lib/arm*/*" \
+      "lib/armeabi*/*" \
+      "lib/x86/*" \
     || true
 
 FROM eclipse-temurin:25-jre-noble AS runtime
