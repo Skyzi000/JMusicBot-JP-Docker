@@ -13,7 +13,7 @@
 - 常時起動が簡単
 - 更新が簡単
 - イメージサイズが最小限
-  ※0.9.8以降はffmpegを含むため少し大きくなっています。
+  ※0.11.0では公式jarが800MB超に肥大化しましたが、未使用のネイティブライブラリを除去して大幅に軽量化しています。
   - ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/skyzi000/jmusicbot-jp/latest?label=latest%20size)
   - ![Docker Image Size (tag)](https://img.shields.io/docker/image-size/skyzi000/jmusicbot-jp/beta?label=beta%20size)
 - Dockerがわからなくても(多分)使える

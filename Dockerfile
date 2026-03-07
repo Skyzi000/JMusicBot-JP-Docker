@@ -12,7 +12,7 @@ RUN JAR_URL=$(curl -s "https://api.github.com/repos/Cosgy-Dev/JMusicBot-JP/relea
     echo "Downloading: ${JAR_URL}" && \
     curl -SLo JMusicBot.jar "${JAR_URL}"
 
-# Strip non-linux-x86_64 native libraries from jar
+# Strip unused native libraries from jar
 RUN zip -d JMusicBot.jar \
       "org/bytedeco/*/windows-*/*" \
       "org/bytedeco/*/macosx-*/*" \
@@ -21,6 +21,7 @@ RUN zip -d JMusicBot.jar \
       "org/bytedeco/*/linux-arm*/*" \
       "org/bytedeco/*/linux-ppc*/*" \
       "org/bytedeco/*/linux-x86/*" \
+      "org/bytedeco/*/linux-x86_64*/*" \
       "org/bytedeco/*/linux-riscv*/*" \
       "natives/win*/*" \
       "natives/darwin/*" \
@@ -40,6 +41,7 @@ RUN zip -d JMusicBot.jar \
       "lib/arm*/*" \
       "lib/armeabi*/*" \
       "lib/x86/*" \
+      "lib/x86_64/*" \
     || true
 
 FROM eclipse-temurin:25-jre-noble AS runtime

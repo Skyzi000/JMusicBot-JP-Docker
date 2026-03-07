@@ -20,7 +20,13 @@ if [[ -z "$version" ]]; then
   exit 1
 fi
 
-tag="v$version"
+timestamp="${RELEASE_TIMESTAMP:-$(date +%Y%m%d%H%M%S)}"
+if [[ ! "$timestamp" =~ ^[0-9]{14}$ ]]; then
+  echo "RELEASE_TIMESTAMP は YYYYMMDDHHMMSS 形式の14桁で指定してください。現在の値: $timestamp" >&2
+  exit 1
+fi
+
+tag="v${version}-${timestamp}"
 
 if git rev-parse -q --verify "refs/tags/$tag" >/dev/null 2>&1; then
   echo "ローカルタグ $tag は既に存在します。" >&2
@@ -44,6 +50,8 @@ if [[ "$head_commit" != "$origin_main_commit" ]]; then
 fi
 
 echo "現在のブランチ: $branch"
+echo "JMusicBot バージョン: $version"
+echo "リリース日時サフィックス: $timestamp"
 echo "作成するタグ: $tag"
 echo "対象コミット: $(git rev-parse --short HEAD)"
 
@@ -57,7 +65,7 @@ case "$confirm" in
     ;;
 esac
 
-git tag -a "$tag" -m "https://github.com/Cosgy-Dev/JMusicBot-JP/releases/tag/$version"
+git tag -a "$tag" -m "https://github.com/Cosgy-Dev/JMusicBot-JP/releases/tag/$version"$'\n\n'"release-timestamp: $timestamp"
 git push origin "$tag"
 
 echo "タグ $tag を作成して push しました。"
