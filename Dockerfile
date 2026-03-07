@@ -21,7 +21,7 @@ RUN zip -d JMusicBot.jar \
       "org/bytedeco/*/linux-arm*/*" \
       "org/bytedeco/*/linux-ppc*/*" \
       "org/bytedeco/*/linux-x86/*" \
-      "org/bytedeco/*/linux-x86_64/*" \
+      "org/bytedeco/*/linux-x86_64*/*" \
       "org/bytedeco/*/linux-riscv*/*" \
       "natives/win*/*" \
       "natives/darwin/*" \
