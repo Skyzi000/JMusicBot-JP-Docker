@@ -12,7 +12,7 @@ RUN JAR_URL=$(curl -s "https://api.github.com/repos/Cosgy-Dev/JMusicBot-JP/relea
     echo "Downloading: ${JAR_URL}" && \
     curl -SLo JMusicBot.jar "${JAR_URL}"
 
-# Strip non-linux-x86_64 native libraries from jar
+# Strip unused native libraries from jar
 RUN zip -d JMusicBot.jar \
       "org/bytedeco/*/windows-*/*" \
       "org/bytedeco/*/macosx-*/*" \
